@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Natália & Fábio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #fdeef4;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 0 10px;
+      font-size: 2.5rem;
+      color: #d6336c;
+      font-weight: 700;
+    }
+
+    /* Carrossel */
+    .carousel {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+    }
+
+    /* Sessão Juntos Há */
+    .counter-section {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.8rem;
+      color: #d6336c;
+    }
+
+    #counter {
+      margin-top: 10px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #a61e4d;
+    }
+
+    /* Mensagem */
+    .message-box {
+      margin: 40px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .message-box h2 {
+      text-align: center;
+      color: #d6336c;
+      font-size: 2rem;
+    }
+
+    .message-box p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      text-align: center;
+      color: #444;
+    }
+
+    /* Corações caindo */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<header>Natália & Fábio</header>
+
+<!-- Carrossel -->
+<div class="carousel" id="carousel">
+  <img src="fotos/foto1.jpg" />
+  <img src="fotos/foto2.jpg" />
+</div>
+
+<div class="counter-section">
+  Juntos há
+  <div id="counter"></div>
+</div>
+
+<div class="message-box">
+  <h2>Nossa Mensagem</h2>
+  <p id="mensagemTexto">Nestes anos ao seu lado, vivi a certeza mais bonita da minha vida: eu sou feliz com você, e sei que serei feliz por toda a minha vida enquanto caminharmos juntos. Nossa história ganhou cores novas, alegrias novas e capítulos que jamais esquecerei. Vivemos descobertas, realizamos sonhos, enfrentamos desafios e seguimos firmes, sempre de mãos dadas.<br><br>
+E como Deus foi generoso conosco… Ele nos presenteou com nossas filhas gêmeas, duas luzes lindas que transformaram nossa vida e ampliaram nosso amor de um jeito que eu jamais imaginei. Vivemos a bênção de ver você conquistar um novo cargo, fruto da sua força, da sua coragem e do seu coração gigante. Mudamos de cidade, recomeçamos, crescemos — e, em tudo isso, o que mais brilhou foi o nosso amor.<br><br>
+Eu te admiro, te respeito e te amo profundamente. Sou grato por cada sorriso, por cada abraço, por cada noite difícil que superamos e por cada manhã em que acordamos unidos. Você é a pessoa mais importante da minha vida, meu amor mais precioso, minha companheira de alma.<br><br>
+Desejo que o nosso amor seja sempre forte o bastante para florescer mesmo na rotina, que seja imenso como o céu e que nunca enxerguemos no outro algo que não possa ser acolhido, compreendido ou superado. Que sejamos sempre dois que se tornam um — e um que sempre se lembra de ser dois.<br><br>
+Que Deus continue abençoando nosso lar, nossas filhas e nossa caminhada. Eu te amo, minha esposa!</p>
+</div>
+
+<!-- Música de fundo -->
+<audio id="musica" src="musica/musica.mp3" autoplay loop></audio>
+
+<script>
+  // Carrossel simples
+  let index = 0;
+  const imgs = document.querySelectorAll('#carousel img');
+  function showNextImage() {
+    imgs.forEach(img => img.style.display = 'none');
+    imgs[index].style.display = 'block';
+    index = (index + 1) % imgs.length;
+  }
+  showNextImage();
+  setInterval(showNextImage, 3000);
+
+  // Contador de tempo
+  function calcularTempo() {
+    const casamento = new Date(2017, 1, 11);
+    const hoje = new Date();
+
+    let anos = hoje.getFullYear() - casamento.getFullYear();
+    let meses = hoje.getMonth() - casamento.getMonth();
+    let dias = hoje.getDate() - casamento.getDate();
+
+    if (dias < 0) {
+      meses--;
+      dias += new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate();
+    }
+
+    if (meses < 0) {
+      anos--;
+      meses += 12;
+    }
+
+    document.getElementById('counter').textContent = `${anos} anos, ${meses} meses e ${dias} dias`;
+  }
+  calcularTempo();
+
+  // Corações caindo
+  function criarCoracao() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (3 + Math.random() * 4) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+  setInterval(criarCoracao, 300);
+</script>
+
+</body>
+</html>
