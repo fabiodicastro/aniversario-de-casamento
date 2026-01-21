@@ -11,53 +11,59 @@
         font-family: 'Arial', sans-serif;
         background: #fff0f6;
         overflow-x: hidden;
+        padding-bottom: 50px;
     }
 
     h1 {
         text-align: center;
-        font-size: 3rem;
+        font-size: 2.5rem;
         margin-top: 20px;
         color: #d6336c;
     }
 
-    /* Carrossel */
+    /* Carrossel Ajustado */
     .carousel {
         width: 90%;
-        max-width: 700px;
+        max-width: 400px;
+        height: 300px;
         margin: 20px auto;
         overflow: hidden;
         border-radius: 20px;
         box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        background: #000;
+        position: relative;
+        z-index: 1; /* Garante que o carrossel fique abaixo dos corações */
     }
 
     .slides {
         display: flex;
         width: 500%;
-        animation: slide 25s infinite;
+        height: 100%;
+        animation: slide 20s infinite;
     }
 
     .slides img {
-        width: 100%;
+        width: 20%;
+        height: 100%;
         object-fit: cover;
     }
 
     @keyframes slide {
         0% { transform: translateX(0); }
         20% { transform: translateX(0); }
-        25% { transform: translateX(-100%); }
-        40% { transform: translateX(-100%); }
-        45% { transform: translateX(-200%); }
-        60% { transform: translateX(-200%); }
-        65% { transform: translateX(-300%); }
-        80% { transform: translateX(-300%); }
-        85% { transform: translateX(-400%); }
-        100% { transform: translateX(-400%); }
+        25% { transform: translateX(-20%); }
+        40% { transform: translateX(-20%); }
+        45% { transform: translateX(-40%); }
+        60% { transform: translateX(-40%); }
+        65% { transform: translateX(-60%); }
+        80% { transform: translateX(-60%); }
+        85% { transform: translateX(-80%); }
+        100% { transform: translateX(-80%); }
     }
 
-    /* Contagem */
     #contador {
         text-align: center;
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-top: 10px;
         color: #c2255c;
         font-weight: bold;
@@ -66,42 +72,75 @@
     h2 {
         text-align: center;
         color: #d6336c;
-        margin-top: 40px;
+        margin-top: 30px;
+        font-size: 1.5rem;
     }
 
     .mensagem {
-        width: 90%;
-        max-width: 800px;
+        width: 85%;
+        max-width: 600px;
         background: white;
         margin: 20px auto;
-        padding: 25px;
+        padding: 20px;
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0,0,0,0.15);
-        font-size: 1.2rem;
-        line-height: 1.8;
+        font-size: 1.1rem;
+        line-height: 1.6;
         color: #5a012a;
         text-align: justify;
+        position: relative;
+        z-index: 1; /* Fica abaixo dos corações */
     }
 
-    /* Corações caindo */
+    /* Botão de Música */
+    .music-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #d6336c;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 1000; /* Botão fica acima de tudo para poder clicar */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulsando 2s infinite;
+    }
+
+    @keyframes pulsando {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    /* --- CORAÇÕES CAINDO (ATUALIZADO) --- */
     .coracao {
         position: fixed;
         top: -10px;
         color: #ff4d6d;
         font-size: 20px;
         animation: cair linear infinite;
+        
+        /* O segredo está aqui: z-index alto traz para frente */
+        z-index: 50; 
+        
+        /* Isso permite clicar "através" do coração (nos botões ou texto) */
+        pointer-events: none; 
     }
 
     @keyframes cair {
-        to {
-            transform: translateY(110vh);
-            opacity: 0;
-        }
+        to { transform: translateY(110vh); opacity: 0; }
     }
 </style>
 </head>
 
-<body>
+<body onclick="iniciarMusica()">
 
 <h1>Natália & Fábio</h1>
 
@@ -123,59 +162,79 @@
 <div class="mensagem">
     Meu amor, eu sou muito feliz e sei que serei feliz por toda a minha vida ao seu lado.  
     Durante todos esses anos, descobrimos tantas coisas juntos...  
-    Coisas profundas, especiais, que marcaram a nossa história.
+    Coisas profundas, especiais, que marcaram a nossa história.<br><br>
 
     Construímos sonhos, realizamos outros, mudamos de cidade, enfrentamos desafios, vencemos batalhas.
     Deus nos confiou o maior presente que poderíamos receber:  
-    <strong>nossas filhas gêmeas, tão lindas e iluminadas</strong>, que enchem nossa casa de vida.
+    <strong>nossas filhas gêmeas, tão lindas e iluminadas</strong>, que enchem nossa casa de vida.<br><br>
 
     Você conquistou seu novo cargo, e eu me orgulho imensamente de você, da sua força, da sua coragem e do seu coração.  
-    Rimos, choramos, discutimos, abraçamos, vencemos cada fase lado a lado.  
+    Rimos, choramos, discutimos, abraçamos, vencemos cada fase lado a lado.<br><br>
 
-    E em cada momento, o nosso amor cresceu.
+    E em cada momento, o nosso amor cresceu.<br><br>
 
     Você, meu amor, é a parte mais preciosa da minha vida.  
-    A cada dia eu aprendo mais com você, cresço mais, me torno melhor graças ao amor que construímos.
+    A cada dia eu aprendo mais com você, cresço mais, me torno melhor graças ao amor que construímos.<br><br>
 
-    Desejo que o nosso amor seja tão forte que vença a rotina, tão imenso quanto o céu, e tão bonito que nunca nos deixe esquecer o quanto somos abençoados.
+    Desejo que o nosso amor seja tão forte que vença a rotina, tão imenso quanto o céu, e tão bonito que nunca nos deixe esquecer o quanto somos abençoados.<br><br>
 
     Que dois sejam sempre um.  
-    E que um possa ser sempre dois.
+    E que um possa ser sempre dois.<br><br>
 
     Que Deus continue iluminando a nossa família.  
     Eu te amo, minha esposa. Hoje e sempre. ❤️
 </div>
 
-<audio id="bgmusic" autoplay loop>
+<button class="music-btn" onclick="toggleMusic(event)">🎵</button>
+
+<audio id="bgmusic" loop>
     <source src="musica/musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Contagem desde 11/02/2017
+// --- LÓGICA DA MÚSICA ---
+let musicaTocando = false;
+const audio = document.getElementById("bgmusic");
+const btn = document.querySelector(".music-btn");
+
+function iniciarMusica() {
+    if (!musicaTocando) {
+        audio.play().then(() => {
+            musicaTocando = true;
+            btn.innerHTML = "❚❚";
+        }).catch(error => {
+            console.log("Aguardando interação do usuário.");
+        });
+    }
+}
+
+function toggleMusic(event) {
+    event.stopPropagation();
+    if (audio.paused) {
+        audio.play();
+        btn.innerHTML = "❚❚";
+        musicaTocando = true;
+    } else {
+        audio.pause();
+        btn.innerHTML = "🎵";
+        musicaTocando = false;
+    }
+}
+
+// --- CONTADOR ---
 function calcularTempo() {
     const inicio = new Date(2017, 1, 11); 
     const agora = new Date();
-
     let anos = agora.getFullYear() - inicio.getFullYear();
     let meses = agora.getMonth() - inicio.getMonth();
     let dias = agora.getDate() - inicio.getDate();
-
-    if (dias < 0) {
-        meses--;
-        dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
-    }
-
-    if (meses < 0) {
-        anos--;
-        meses += 12;
-    }
-
-    document.getElementById("contador").innerHTML =
-        `${anos} anos, ${meses} meses e ${dias} dias`;
+    if (dias < 0) { meses--; dias += new Date(agora.getFullYear(), agora.getMonth(), 0).getDate(); }
+    if (meses < 0) { anos--; meses += 12; }
+    document.getElementById("contador").innerHTML = `${anos} anos, ${meses} meses e ${dias} dias`;
 }
 calcularTempo();
 
-// Corações caindo
+// --- CORAÇÕES ---
 setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "coracao";
@@ -184,15 +243,8 @@ setInterval(() => {
     heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
     heart.style.fontSize = (Math.random() * 15 + 10) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 6000);
 }, 300);
-
-// Forçar música no mobile
-document.addEventListener("click", () => {
-    const audio = document.getElementById("bgmusic");
-    audio.play();
-});
 </script>
 
 </body>
