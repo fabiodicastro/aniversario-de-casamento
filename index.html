@@ -11,7 +11,7 @@
         font-family: 'Arial', sans-serif;
         background: #fff0f6;
         overflow-x: hidden;
-        padding-bottom: 50px;
+        padding-bottom: 80px; /* Espaço extra no final */
     }
 
     h1 {
@@ -21,7 +21,7 @@
         color: #d6336c;
     }
 
-    /* --- CARROSSEL (Versão Estável) --- */
+    /* Carrossel */
     .carousel {
         width: 90%;
         max-width: 400px;
@@ -30,9 +30,9 @@
         overflow: hidden;
         border-radius: 20px;
         box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        background: #000; /* Fundo preto caso a imagem demore a carregar */
-        position: relative; /* Necessário para o layout */
-        z-index: 1; /* Garante que ele existe na pilha de camadas */
+        background: #000;
+        position: relative;
+        z-index: 5; /* Garante visibilidade */
     }
 
     .slides {
@@ -46,7 +46,6 @@
         width: 20%;
         height: 100%;
         object-fit: cover;
-        display: block; /* Garante que a imagem se comporte como bloco */
     }
 
     @keyframes slide {
@@ -90,10 +89,10 @@
         color: #5a012a;
         text-align: justify;
         position: relative;
-        z-index: 1;
+        z-index: 5;
     }
 
-    /* --- BOTÃO DE MÚSICA (Camada Máxima) --- */
+    /* Botão de Música - Forçado a aparecer */
     .music-btn {
         position: fixed;
         bottom: 20px;
@@ -104,14 +103,11 @@
         border-radius: 50%;
         width: 60px;
         height: 60px;
-        font-size: 24px;
+        font-size: 30px;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        
-        /* Z-Index Altíssimo para garantir que apareça */
-        z-index: 9999; 
-        
-        display: flex;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        z-index: 2147483647; /* O valor máximo possível no navegador */
+        display: flex !important; /* Força o botão a ser exibido */
         align-items: center;
         justify-content: center;
         animation: pulsando 2s infinite;
@@ -123,19 +119,15 @@
         100% { transform: scale(1); }
     }
 
-    /* --- CORAÇÕES --- */
+    /* Corações caindo */
     .coracao {
         position: fixed;
         top: -10px;
         color: #ff4d6d;
         font-size: 20px;
         animation: cair linear infinite;
-        
-        /* Fica acima do texto (z-index 1), mas abaixo do botão */
-        z-index: 50; 
-        
-        /* Permite clicar através do coração */
-        pointer-events: none; 
+        z-index: 9999; /* Fica acima do texto, mas abaixo do botão */
+        pointer-events: none; /* Permite clicar através do coração */
     }
 
     @keyframes cair {
@@ -192,11 +184,10 @@
 <button class="music-btn" onclick="toggleMusic(event)">🎵</button>
 
 <audio id="bgmusic" loop>
-    <source src="musica/musica.mp3" type="audio/mpeg">
+    <source src="música/musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// --- Script da Música ---
 let musicaTocando = false;
 const audio = document.getElementById("bgmusic");
 const btn = document.querySelector(".music-btn");
@@ -223,7 +214,6 @@ function toggleMusic(event) {
     }
 }
 
-// --- Contador ---
 function calcularTempo() {
     const inicio = new Date(2017, 1, 11); 
     const agora = new Date();
@@ -236,7 +226,6 @@ function calcularTempo() {
 }
 calcularTempo();
 
-// --- Corações ---
 setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "coracao";
